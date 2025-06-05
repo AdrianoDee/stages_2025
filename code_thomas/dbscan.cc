@@ -153,7 +153,7 @@ public:
 int main()
 {
     std::ifstream f;
-    f.open("D1_data.csv"); //ouverture du fichier .csv
+    f.open("../simple_data/D1_data.csv"); //ouverture du fichier .csv
     std::string line; // on crÈÈ une variable ligne qui contiendra chaque ligne du fichier
     std::getline(f, line); //getline avant la boucle permet d'ignorer la premiËre ligne
 
