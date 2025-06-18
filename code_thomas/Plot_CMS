@@ -1,0 +1,34 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+tracks   = pd.read_csv("tracks_z.csv")
+sim_vtx  = pd.read_csv("sim_vtx_z.csv")       
+centres  = pd.read_csv("Centres_DBSCAN.csv")  
+si la colonne s’appelle encore centre_x, on la renomme :
+if 'centre_x' in centres.columns:
+    centres = centres.rename(columns={'centre_x': 'z'})
+
+
+z_tracks = tracks.loc[tracks.pt > 0.5, 'z']
+
+
+plt.figure(figsize=(9, 5))
+
+# Pistes
+plt.plot(z_tracks, np.zeros_like(z_tracks),
+         'o', markersize=1, label='tracks_z', alpha=0.6)
+
+# simulés
+plt.plot(sim_vtx['z'], np.zeros_like(sim_vtx['z']),
+         'x', markersize=10, color='green', label='sim_vtx_z')
+
+# centres DBSCAN
+plt.plot(centres['z'], np.zeros_like(centres['z']),
+         'o', markersize=4, color='red', label='reco_vtx_z')
+
+plt.xlabel('z  [arb. unit]')
+plt.yticks([])                 # on cache l’axe y (toujours 0)
+plt.legend()
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+plt.show()
